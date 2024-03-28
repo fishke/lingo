@@ -3,13 +3,14 @@ import {
   ClerkLoaded,
   ClerkLoading,
   SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import SignUpBtn from "./_components/SignUpBtn";
+import SignInBtn from "./_components/SignInBtn";
 
 export default function Home() {
   return (
@@ -21,34 +22,16 @@ export default function Home() {
         <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center text-balance">
           Learn, Practice and master new languages with Lingo
         </h1>
-        <div>
+        <div className="flex flex-col items-center gap-3 max-w-[330px] w-full">
           <ClerkLoading>
             <Loader size={20} className="text-muted-foreground animate-spin" />
           </ClerkLoading>
           <ClerkLoaded>
             <SignedOut>
-              <SignUpButton
-                mode="modal"
-                afterSignInUrl="/learn"
-                afterSignUpUrl="/learn"
-              >
-                <Button size="lg" variant="secondary" className="w-full">
-                  Get Started
-                </Button>
-              </SignUpButton>
-              <SignInButton
-                mode="modal"
-                afterSignInUrl="/learn"
-                afterSignUpUrl="/learn"
-              >
-                <Button
-                  size="lg"
-                  variant="primaryOutline"
-                  className="w-full mt-2"
-                >
-                  I Already have an account
-                </Button>
-              </SignInButton>
+              <SignUpBtn className="w-full">Get Started</SignUpBtn>
+              <SignInBtn className="w-full mt-2" variant="primaryOutline">
+                I Already have an account
+              </SignInBtn>
             </SignedOut>
             <SignedIn>
               <Button size="lg" variant="secondary" asChild>

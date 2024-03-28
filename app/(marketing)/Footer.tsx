@@ -11,7 +11,7 @@ export function Footer() {
   ];
   return (
     <footer className="hidden w-full h-20 p-2 border-t-2 lg:block border-slate-200">
-      <div className="max-w-screen-lg mx-auto flex items-center justify-evenly h-full">
+      <div className="flex items-center h-full mx-auto max-w-screen-lg justify-evenly">
         {flags.map((flag) => (
           <Button size="lg" variant="ghost" className="w-full" key={flag.alt}>
             <Image

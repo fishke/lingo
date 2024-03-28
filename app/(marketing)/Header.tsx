@@ -15,10 +15,10 @@ type Props = {};
 export function Header({}: Props) {
   return (
     <header className="w-full h-20 px-4 border-b-2 border-slate-200">
-      <div className="lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
-        <div className="pt-8 pl-4 pb-7 flex items-center gap-3">
+      <div className="flex items-center justify-between h-full mx-auto lg:max-w-screen-lg">
+        <div className="flex items-center pt-8 pl-4 pb-7 gap-3">
           <Image src="/mascot.svg" alt="logo" width={40} height={40} />
-          <h1 className="text-2xl font-extrabold text-gray-600 tracking-wide">
+          <h1 className="text-2xl font-extrabold tracking-wide text-gray-600">
             Lingo
           </h1>
         </div>

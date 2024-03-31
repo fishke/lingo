@@ -1,14 +1,38 @@
 "use client";
 
-import { courses } from "@/db/schema";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { courses, userProgress } from "@/db/schema";
 import { CourseCard } from "./CourseCard";
+import { upsertUserProgress } from "@/actions/user-progress";
+import { toast } from "sonner";
 
 type Props = {
   courses: (typeof courses.$inferSelect)[];
-  activeCourseId: number;
+  activeCourseId?: (typeof userProgress.$inferSelect)["activeCourseId"];
 };
 
 export function CoursesList({ courses, activeCourseId }: Props) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+
+  function onClick(id: number) {
+    if (pending) return;
+
+    //if the user clicked a course that is already active, navigate to the learn page
+    if (id === activeCourseId) {
+      return router.push("/learn");
+    }
+
+    //otherwise, navigate to the course page
+    startTransition(async () => {
+      try {
+        await upsertUserProgress(id);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    });
+  }
   return (
     <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4">
       {courses.map((course) => (
@@ -17,9 +41,9 @@ export function CoursesList({ courses, activeCourseId }: Props) {
           id={course.id}
           title={course.title}
           imageSrc={course.imageSrc}
-          onClick={() => {}}
-          disabled={false}
+          disabled={pending}
           active={course.id === activeCourseId}
+          onClick={onClick}
         />
       ))}
     </div>

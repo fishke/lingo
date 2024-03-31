@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SidebarItem } from "./SidebarItem";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
-import { Spinner } from "./Spinner";
+import { ClerkSpinner } from "./ClerkSpinner";
 
 type Props = {
   className?: string;
@@ -40,7 +40,7 @@ export function Sidebar({ className }: Props) {
         ))}
       </div>
       <div className="p-4">
-        <Spinner />
+        <ClerkSpinner />
         <ClerkLoaded>
           <UserButton afterSignOutUrl="/" />
         </ClerkLoaded>

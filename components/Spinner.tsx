@@ -1,18 +1,9 @@
-import { cn } from "@/lib/utils";
-import { ClerkLoading } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
 
-type Props = {
-  className?: string;
-};
-
-export function Spinner({ className }: Props) {
+export const Spinner = () => {
   return (
-    <ClerkLoading>
-      <Loader
-        size={20}
-        className={cn("text-muted-foreground animate-spin", className)}
-      />
-    </ClerkLoading>
+    <div className="flex items-center justify-center w-full h-full">
+      <Loader className="w-6 h-6 text-muted-foreground animate-spin" />
+    </div>
   );
-}
+};
